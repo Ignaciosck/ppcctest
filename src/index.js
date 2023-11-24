@@ -17,11 +17,11 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  	res.json({ message: 'Hola, mundoaaaaaaaaaaa!' });
+  	res.json({ message: 'Hola, Mundo!' });
 });
 
 app.get('/ping', (req, res) => {
-  res.send('pong');
+ res.json({ message: 'pong!' });
 });
 
 let server;
