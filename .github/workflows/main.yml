@@ -56,3 +56,6 @@ jobs:
 
       - name: Run Ansible playbook
         run: ansible-playbook ansible/playbook.yml
+        env:
+         docker_hub_username: ${{ secrets.DOCKER_HUB_USERNAME }}
+         docker_hub_token: ${{ secrets.DOCKER_HUB_TOKEN }}
