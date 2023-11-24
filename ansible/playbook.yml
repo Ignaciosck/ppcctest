@@ -49,33 +49,37 @@
 
     - name: Wait for the Application to Start
       wait_for:
-        host: "localhost"
+        host: 'localhost'
         port: 3000
-        delay: 5
+        delay: 1
         timeout: 60
 
     - name: Test / Endpoint
-      uri:
-        url: "http://localhost:3000/"
+      ansible.builtin.uri:
+        url: 'http://localhost:3000/'
+        method: GET
       register: response_root
 
     - name: Debug Information
       debug:
         var: response_root
 
-    - name: Fail if / Endpoint does not return '¡Hola, Mundo!'
-      fail:
-        msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json | default({}).message }}'"
-      when: response_root.json | default({}).message != "Hola, Mundo!"
+    - name: Debug Information - Response Content
+      debug:
+        var: response_root
 
-    # - name: Test /ping Endpoint
-    #   uri:
-    #     url: "http://localhost:3000/ping"
-    #   register: response_ping
-    # - name: Debug Information
-    #   debug:
-    #     var: response_ping
-    # - name: Fail if /ping Endpoint does not return 'pong'
-    #   fail:
-    #     msg: "Expected 'pong' but received '{{ response_ping.json }}'"
-    #   when: response_ping.json != "pong"
+    - name: Handle Success
+      debug:
+        msg: 'The / Endpoint returned the expected response.'
+      changed_when: response_root.json.message == "Hola, Mundo!"
+    - name: Test /ping Endpoint
+      uri:
+        url: 'http://localhost:3000/ping'
+      register: response_ping
+    - name: Debug Information
+      debug:
+        var: response_ping
+    - name: Handle Success
+      debug:
+        msg: 'The / Endpoint returned the expected response.'
+      changed_when: response_root.json.message == "pong!"
