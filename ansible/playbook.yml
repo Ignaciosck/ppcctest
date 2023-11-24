@@ -41,7 +41,7 @@
 
     - name: Debug Container Logs
       debug:
-        var: container_result.logs
+        var: container_result
 
     - name: Wait for the Application to Start
       wait_for:
