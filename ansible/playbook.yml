@@ -37,6 +37,11 @@
         ports:
           - "3000:3000"
         state: started
+      register: container_result
+
+    - name: Debug Container Logs
+      debug:
+        var: container_result.logs
 
     - name: Wait for the Application to Start
       wait_for:
