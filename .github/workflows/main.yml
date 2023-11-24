@@ -40,3 +40,15 @@ jobs:
 
       - name: Push to Docker Hub
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-production-image
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ansible
+        uses: ansible/ansible-setup@v4
+
+      - name: Run Ansible playbook
+        run: ansible-playbook ansible/playbook.yml
