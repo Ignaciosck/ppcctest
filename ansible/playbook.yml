@@ -10,18 +10,18 @@
 
     - name: Log in to Docker Hub
       docker_login:
-        username: "{{ secrets.DOCKER_HUB_USERNAME }}"
-        password: "{{ secrets.DOCKER_HUB_TOKEN }}"
+        username: "{{ docker_hub_username }}"
+        password: "{{ docker_hub_token }}"
 
     - name: Pull Docker Image
       docker_image:
-        name: "{{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod"
+        name: "{{ docker_hub_username }}/ppcc:prod"
         state: present
 
     - name: Run Docker Container
       docker_container:
         name: ppcc-container
-        image: "{{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod"
+        image: "{{ docker_hub_username }}/ppcc:prod"
         ports:
           - "3000:3000"
         state: started
