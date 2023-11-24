@@ -1,0 +1,20 @@
+name: Run Tests in Docker Container
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Test Image
+        run: docker build -t myapp:test -f Dockerfile.testing .
+
+      - name: Run Tests in Docker Container
+        run: docker run myapp:test npm test
