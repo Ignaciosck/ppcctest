@@ -20,6 +20,7 @@
     - name: Pull Docker Image
       docker_image:
         name: "{{ docker_hub_username }}/ppcc:prod"
+        source: pull
         state: present
 
     - name: Run Docker Container
