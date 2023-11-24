@@ -55,7 +55,6 @@ jobs:
         shell: bash
 
       - name: Run Ansible playbook
-        run: ansible-playbook ansible/playbook.yml
-        env:
-         docker_hub_username: ${{ secrets.DOCKER_HUB_USERNAME }}
-         docker_hub_token: ${{ secrets.DOCKER_HUB_TOKEN }}
+        run: |
+          ansible-playbook -e "docker_hub_username=${{ secrets.DOCKER_HUB_USERNAME }}" -e "docker_hub_token=${{ secrets.DOCKER_HUB_TOKEN }}" ansible/playbook.yml
+        
