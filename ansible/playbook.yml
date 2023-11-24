@@ -1,0 +1,54 @@
+---
+- name: Install Docker and Deploy App
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Log in to Docker Hub
+      docker_login:
+        username: "{{ secrets.DOCKER_HUB_USERNAME }}"
+        password: "{{ secrets.DOCKER_HUB_TOKEN }}"
+
+    - name: Pull Docker Image
+      docker_image:
+        name: "{{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod"
+        state: present
+
+    - name: Run Docker Container
+      docker_container:
+        name: ppcc-container
+        image: "{{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod"
+        ports:
+          - "3000:3000"
+        state: started
+
+    - name: Wait for the Application to Start
+      wait_for:
+        host: "localhost"
+        port: 3000
+        delay: 5
+        timeout: 60
+
+    - name: Test / Endpoint
+      uri:
+        url: "http://localhost:3000/"
+      register: response_root
+
+    - name: Fail if / Endpoint does not return '¡Hola, Mundo!'
+      fail:
+        msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json }}'"
+      when: response_root.json != "¡Hola, Mundo!"
+
+    - name: Test /ping Endpoint
+      uri:
+        url: "http://localhost:3000/ping"
+      register: response_ping
+
+    - name: Fail if /ping Endpoint does not return 'pong'
+      fail:
+        msg: "Expected 'pong' but received '{{ response_ping.json }}'"
+      when: response_ping.json != "pong"
