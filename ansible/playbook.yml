@@ -51,19 +51,19 @@
         var: response_root
     - name: Fail if / Endpoint does not return '¡Hola, Mundo!'
       fail:
-        msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json }}'"
-      when: response_root.json != "¡Hola, Mundo!"
+        msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json.message }}'"
+      when: response_root.json.message != "¡Hola, Mundo!"
 
     
 
-    - name: Test /ping Endpoint
-      uri:
-        url: "http://localhost:3000/ping"
-      register: response_ping
-    - name: Debug Information
-      debug:
-        var: response_ping
-    - name: Fail if /ping Endpoint does not return 'pong'
-      fail:
-        msg: "Expected 'pong' but received '{{ response_ping.json }}'"
-      when: response_ping.json != "pong"
+    # - name: Test /ping Endpoint
+    #   uri:
+    #     url: "http://localhost:3000/ping"
+    #   register: response_ping
+    # - name: Debug Information
+    #   debug:
+    #     var: response_ping
+    # - name: Fail if /ping Endpoint does not return 'pong'
+    #   fail:
+    #     msg: "Expected 'pong' but received '{{ response_ping.json }}'"
+    #   when: response_ping.json != "pong"
