@@ -13,7 +13,9 @@
         name: requests
 
     - name: Install Docker Python library.
-      pip: name=docker state=present
+      pip: 
+        name: docker
+        state: present
 
     - name: Log in to Docker Hub
       docker_login:
@@ -39,9 +41,11 @@
         state: started
       register: container_result
 
-    - name: Debug Container Logs
-      debug:
-        var: container_result
+    - name: Check Docker Logs
+      command: docker logs ppcc-container
+      register: docker_logs
+    - debug:
+        var: docker_logs.stdout
 
     - name: Wait for the Application to Start
       wait_for:
@@ -63,7 +67,6 @@
       fail:
         msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json | default({}).message }}'"
       when: response_root.json | default({}).message != "Hola, Mundo!"
-    
 
     # - name: Test /ping Endpoint
     #   uri:
