@@ -39,7 +39,10 @@
         port: 3000
         delay: 5
         timeout: 60
-
+    - name: Debug Docker
+      run: |
+       docker ps -a
+       docker inspect ppcc-container
    
 
     - name: Test / Endpoint
