@@ -60,7 +60,7 @@
       uri:
         url: "http://localhost:3000/ping"
       register: response_ping
-   - name: Debug Information
+    - name: Debug Information
       debug:
         var: response_ping
     - name: Fail if /ping Endpoint does not return 'pong'
