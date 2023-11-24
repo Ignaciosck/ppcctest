@@ -60,5 +60,5 @@ jobs:
           sudo apt-get remove -y containerd.io
       - name: Run Ansible playbook
         run: |
-          ansible-playbook -e "docker_hub_username=${{ secrets.DOCKER_HUB_USERNAME }}" -e "docker_hub_token=${{ secrets.DOCKER_HUB_TOKEN }}" ansible/playbook.yml
+          ansible-playbook -e "docker_hub_username=${{ secrets.DOCKER_HUB_USERNAME }}" -e "docker_hub_token=${{ secrets.DOCKER_HUB_TOKEN }}" ansible/play2.yml
         
