@@ -40,12 +40,12 @@ describe('Rutas de la aplicación', () => {
   test('GET /ping debería devolver "pong"', async () => {
     const response = await request(server).get('/ping');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('pong');
+    expect(response.body.message).toBe('pong!');
   });
   test('GET / debería devolver "Hola, mundo!"', async () => {
     const response = await request(server).get('/');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Hola, mundo!');
+    expect(response.body.message).toBe('Hola, Mundo!');
   });
   // Agrega más pruebas según sea necesario
 });
