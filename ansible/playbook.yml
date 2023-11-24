@@ -5,7 +5,7 @@
   tasks:
     - name: Update apt and install docker-ce
       apt:
-        name: docker
+        name: docker.io
         state: latest
 
     - name: Install requests library for Ansible
