@@ -56,8 +56,8 @@
 
     - name: Fail if / Endpoint does not return '¡Hola, Mundo!'
       fail:
-        msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json.message }}'"
-      when: response_root.json.message != "Hola, Mundo!"
+        msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json | default({}).message }}'"
+      when: response_root.json | default({}).message != "Hola, Mundo!"
     
 
     # - name: Test /ping Endpoint
