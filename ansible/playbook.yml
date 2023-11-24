@@ -11,7 +11,10 @@
     - name: Install requests library for Ansible
       pip:
         name: requests
-
+    - name: Log in to Docker Hub
+      docker_login:
+        username: "{{ docker_hub_username }}"
+        password: "{{ docker_hub_token }}"
     - name: Log in to Docker Hub
       debug:
         msg: "Docker login with username: {{ docker_hub_username }}"
