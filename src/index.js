@@ -17,7 +17,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hola, mundo!');
+  	res.json({ message: 'Hola, mundoaaaaaaaaaaa!' });
 });
 
 app.get('/ping', (req, res) => {
