@@ -54,7 +54,10 @@ jobs:
 
       - name: Install Ansible
         run: pip3 install ansible
-
+      - name: Set up Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get remove -y containerd.io
       - name: Run Ansible playbook
         run: |
           ansible-playbook -e "docker_hub_username=${{ secrets.DOCKER_HUB_USERNAME }}" -e "docker_hub_token=${{ secrets.DOCKER_HUB_TOKEN }}" ansible/playbook.yml
