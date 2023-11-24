@@ -40,29 +40,29 @@
         delay: 5
         timeout: 60
 
-    - name: Debug Information
-      debug:
-        var: response_root
+   
 
     - name: Test / Endpoint
       uri:
         url: "http://localhost:3000/"
       register: response_root
-
+    - name: Debug Information
+      debug:
+        var: response_root
     - name: Fail if / Endpoint does not return '¡Hola, Mundo!'
       fail:
         msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json }}'"
       when: response_root.json != "¡Hola, Mundo!"
 
-    - name: Debug Information
-      debug:
-        var: response_ping
+    
 
     - name: Test /ping Endpoint
       uri:
         url: "http://localhost:3000/ping"
       register: response_ping
-
+   - name: Debug Information
+      debug:
+        var: response_ping
     - name: Fail if /ping Endpoint does not return 'pong'
       fail:
         msg: "Expected 'pong' but received '{{ response_ping.json }}'"
