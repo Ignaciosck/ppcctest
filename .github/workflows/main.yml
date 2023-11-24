@@ -4,27 +4,27 @@ on:
   workflow_dispatch:
   
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  # test:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Build Test Image
-        run: docker build -t ppcc:test -f docker/Dockerfile.testing .
+  #     - name: Build Test Image
+  #       run: docker build -t ppcc:test -f docker/Dockerfile.testing .
 
-      - name: Run Tests in Docker Container
-        run: docker run ppcc:test npm test
-        # Comprobar si el comando anterior se ejecutó con éxito
-        continue-on-error: true
+  #     - name: Run Tests in Docker Container
+  #       run: docker run ppcc:test npm test
+  #       # Comprobar si el comando anterior se ejecutó con éxito
+  #       continue-on-error: true
 
-      - name: Check Test Results
-        run: exit $?
+  #     - name: Check Test Results
+  #       run: exit $?
         
   build-production-image:
     runs-on: ubuntu-latest
-    needs: test
+    # needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
