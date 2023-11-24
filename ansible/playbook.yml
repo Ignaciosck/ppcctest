@@ -11,7 +11,6 @@
     - name: Install requests library for Ansible
       pip:
         name: requests
-        executable: /usr/bin/python3
 
     - name: Log in to Docker Hub
       docker_login:
