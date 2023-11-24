@@ -3,18 +3,20 @@
   hosts: localhost
   become: true
   tasks:
-    - name: Install Docker
-      apt:
-        name: docker.io
-        state: present
+    
 
     - name: Install requests library for Ansible
       pip:
         name: requests
+
+    - name: Install Docker Python library.
+      pip: name=docker state=present
+
     - name: Log in to Docker Hub
       docker_login:
         username: "{{ docker_hub_username }}"
         password: "{{ docker_hub_token }}"
+
     - name: Log in to Docker Hub
       debug:
         msg: "Docker login with username: {{ docker_hub_username }}"
@@ -39,24 +41,20 @@
         port: 3000
         delay: 5
         timeout: 60
-    - name: Debug Docker
-      run: |
-       docker ps -a
-       docker inspect ppcc-container
-   
 
     - name: Test / Endpoint
       uri:
         url: "http://localhost:3000/"
       register: response_root
+
     - name: Debug Information
       debug:
         var: response_root
+
     - name: Fail if / Endpoint does not return '¡Hola, Mundo!'
       fail:
         msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json.message }}'"
       when: response_root.json.message != "Hola, Mundo!"
-
     
 
     # - name: Test /ping Endpoint
