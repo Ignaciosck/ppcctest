@@ -4,45 +4,45 @@ on:
   workflow_dispatch:
   
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - name: Build Test Image
-  #       run: docker build -t ppcc:test -f docker/Dockerfile.testing .
+      - name: Build Test Image
+        run: docker build -t ppcc:test -f docker/Dockerfile.testing .
 
-  #     - name: Run Tests in Docker Container
-  #       run: docker run ppcc:test npm test
-  #       # Comprobar si el comando anterior se ejecutó con éxito
-  #       continue-on-error: true
+      - name: Run Tests in Docker Container
+        run: docker run ppcc:test npm test
+        # Comprobar si el comando anterior se ejecutó con éxito
+        continue-on-error: true
 
-  #     - name: Check Test Results
-  #       run: exit $?
+      - name: Check Test Results
+        run: exit $?
         
-  # build-production-image:
-  #   runs-on: ubuntu-latest
-  #   # needs: test
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+  build-production-image:
+    runs-on: ubuntu-latest
+    # needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - name: Build Production Image
-  #       run: docker build -t ppcc:prod -f docker/Dockerfile.production .
+      - name: Build Production Image
+        run: docker build -t ppcc:prod -f docker/Dockerfile.production .
 
-  #     - name: Tag Production Image
-  #       run: docker tag ppcc:prod ${{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod
+      - name: Tag Production Image
+        run: docker tag ppcc:prod ${{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod
 
-  #     - name: Log in to Docker Hub
-  #       run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
-  #     - name: Push to Docker Hub
-  #       run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod
+      - name: Push to Docker Hub
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/ppcc:prod
   deploy:
     runs-on: ubuntu-latest
-    # needs: build-production-image
+    needs: build-production-image
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
