@@ -13,9 +13,8 @@
         name: requests
 
     - name: Log in to Docker Hub
-      docker_login:
-        username: "{{ docker_hub_username }}"
-        password: "{{ docker_hub_token }}"
+      debug:
+        msg: "Docker login with username: {{ docker_hub_username }}"
 
     - name: Pull Docker Image
       docker_image:
@@ -38,6 +37,10 @@
         delay: 5
         timeout: 60
 
+    - name: Debug Information
+      debug:
+        var: response_root
+
     - name: Test / Endpoint
       uri:
         url: "http://localhost:3000/"
@@ -47,6 +50,10 @@
       fail:
         msg: "Expected '¡Hola, Mundo!' but received '{{ response_root.json }}'"
       when: response_root.json != "¡Hola, Mundo!"
+
+    - name: Debug Information
+      debug:
+        var: response_ping
 
     - name: Test /ping Endpoint
       uri:
