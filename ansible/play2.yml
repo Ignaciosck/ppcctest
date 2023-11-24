@@ -1,0 +1,80 @@
+---
+- name: Install Docker and Deploy App
+  hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker.io
+        state: latest
+
+    - name: Install requests library for Ansible
+      pip:
+        name: requests
+
+    - name: Install Docker Python library.
+      pip:
+        name: docker
+        state: present
+
+    - name: Log in to Docker Hub
+      docker_login:
+        username: 'ignaciosck'
+        password: 'dckr_pat_JE_VapAlijzyAh9DFNTknuqh9Wg'
+
+    - name: Log in to Docker Hub
+      debug:
+        msg: 'Docker login with username: ignaciosck'
+
+    - name: Pull Docker Image
+      docker_image:
+        name: 'ignaciosck/ppcc:prod'
+        source: pull
+        state: present
+
+    - name: Run Docker Container
+      docker_container:
+        name: ppcc-container
+        image: 'ignaciosck/ppcc:prod'
+        ports:
+          - '3000:3000'
+        state: started
+      register: container_result
+
+    - name: Wait for the Application to Start
+      wait_for:
+        host: 'localhost'
+        port: 3000
+        delay: 1
+        timeout: 60
+
+    - name: Test / Endpoint
+      ansible.builtin.uri:
+        url: 'http://localhost:3000/'
+        method: GET
+      register: response_root
+
+    - name: Debug Information
+      debug:
+        var: response_root
+
+    - name: Debug Information - Response Content
+      debug:
+        var: response_root
+
+    - name: Handle Success
+      debug:
+        msg: 'The / Endpoint returned the expected response.'
+      changed_when: response_root.json.message == "Hola, Mundo!"
+    - name: Test /ping Endpoint
+      uri:
+        url: 'http://localhost:3000/ping'
+      register: response_ping
+    - name: Debug Information
+      debug:
+        var: response_ping
+    - name: Handle Success
+      debug:
+        msg: 'The / Endpoint returned the expected response.'
+      changed_when: response_root.json.message == "pong!"
