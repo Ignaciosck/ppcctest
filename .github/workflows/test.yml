@@ -9,10 +9,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build Test Image
-        run: docker build -t myapp:test -f Dockerfile.testing .
+        run: docker build -t ppcc:test -f docker/Dockerfile.testing .
 
       - name: Run Tests in Docker Container
-        run: docker run myapp:test npm test
+        run: docker run ppcc:test npm test
