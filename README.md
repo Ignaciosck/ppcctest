@@ -16,7 +16,7 @@ Este proyecto es un ejemplo preparado para la primera entrega de la asignatura *
    [![Run Tests and Deploy with Ansible](https://github.com/Ignaciosck/ppcctest/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/Ignaciosck/ppcctest/actions/workflows/main.yml)
 
    [![Run Tests in Docker Container](https://github.com/Ignaciosck/ppcctest/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/Ignaciosck/ppcctest/actions/workflows/test.yml)
-- **Playbook de Ansible:** Contiene un playbook de Ansible para facilitar la implementación y configuración de tu aplicación en entornos específicos.
+- **Playbook de Ansible:** Contiene un playbook de Ansible para facilitar la implementación y configuración del servidor en una máquina Ubuntu/Debian.
 - **Servidor Simple en JavaScript:** El proyecto consiste en un servidor simple desarrollado en JavaScript, con dos Endpoint de ejemplo:
 	- **Dos Endpoints Principales:**
   	- `GET /`: Retorna un saludo simple: `¡Hola, Mundo!`
@@ -24,9 +24,6 @@ Este proyecto es un ejemplo preparado para la primera entrega de la asignatura *
 
 
 
-Git Hub Actions creadas:
-[![Run Tests and Deploy with Ansible](https://github.com/Ignaciosck/ppcctest/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/Ignaciosck/ppcctest/actions/workflows/main.yml)
-[![Run Tests in Docker Container](https://github.com/Ignaciosck/ppcctest/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/Ignaciosck/ppcctest/actions/workflows/test.yml)
 
 ## Licencia
 
