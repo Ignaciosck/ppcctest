@@ -1,13 +1,6 @@
 # Prácticas Continuas 
 
 Este proyecto es un ejemplo preparado para la primera entrega de la asignatura **Prácticas Continuas** del **Máster en Ingeniería de Software** por la Universidad de Murcia
-
-## Tabla de Contenidos
-
-
-- [Características](#características)
-- [Licencia](#licencia)
-
 ## Características
 
 - **Dos Workflows de GitHub Actions:** Incluye dos flujos de trabajo configurados en GitHub Actions para automatizar tareas como pruebas y despliegues.
