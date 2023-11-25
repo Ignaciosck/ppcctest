@@ -13,6 +13,7 @@ Este proyecto es un ejemplo preparado para la primera entrega de la asignatura *
 - **Dos Workflows de GitHub Actions:** Incluye dos flujos de trabajo configurados en GitHub Actions para automatizar tareas como pruebas y despliegues.
 	Git Hub Actions creadas:
 	[![Run Tests and Deploy with Ansible](https://github.com/Ignaciosck/ppcctest/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/Ignaciosck/ppcctest/actions/workflows/main.yml)
+
 	[![Run Tests in Docker Container](https://github.com/Ignaciosck/ppcctest/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/Ignaciosck/ppcctest/actions/workflows/test.yml)
 - **Playbook de Ansible:** Contiene un playbook de Ansible para facilitar la implementación y configuración de tu aplicación en entornos específicos.
 - **Servidor Simple en JavaScript:** El proyecto consiste en un servidor simple desarrollado en JavaScript, con dos Endpoint de ejemplo:
