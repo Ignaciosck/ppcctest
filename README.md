@@ -4,7 +4,6 @@ Este proyecto es un ejemplo preparado para la primera entrega de la asignatura *
 ## Características
 
 - **Dos Workflows de GitHub Actions:** Incluye dos flujos de trabajo configurados en GitHub Actions para automatizar tareas como pruebas y despliegues.
-	Workflows creados:
 
    [![Run Tests and Deploy with Ansible](https://github.com/Ignaciosck/ppcctest/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/Ignaciosck/ppcctest/actions/workflows/main.yml)
 
